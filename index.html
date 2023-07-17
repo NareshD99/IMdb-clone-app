@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMDb app</title>
+    <link rel="stylesheet" href="IMDB.css">
+    <script src="https://kit.fontawesome.com/1270435a88.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar">
+        <nav id="search-nav">
+            <div id="search-box">
+                <!-- IMdb logo -->
+                <div id="IMdb-logo" class="russo-one">
+                    <h1><span style="color: black;">IM</span><span style="color: white;">Db</span></h1>
+                </div>
+                <!-- input movie search box -->
+                <div>
+                    <form action="search-form" method="get">
+                    <input type="text" id="search-movie-input" placeholder="Search movie">
+                    </form>
+                </div>
+                <!-- favorite slider btn -->
+                <div id="favorite" class="russo-one" >
+                    <div><i class="fa-solid fa-bookmark russo-one"></i><span>Favorites</span></i></div>
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- list of search movies grid -->
+    <div id="Poster-grid">
+    </div>
+    <!-- favorite movies list container slider -->
+    <div id="panel" class="panel russo-one">
+        <!-- Panel content here -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closePanel()">×</a>
+        <h2>Favorites<i class="fa-solid fa-bookmark favIcon"></i></h2>
+        <!-- favorite movie list -->
+        <div id="FavMoviesList">
+
+        </div>
+    </div>
+    
+    
+    <script src="IMdbJS.js"></script>
+</body>
+</html>
