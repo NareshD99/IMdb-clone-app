@@ -68,7 +68,7 @@ function displayMoviesPoster(movies)
     });
 
 
-    //creating H1 for title
+    //creating H3 for title
     const movieTitle = document.createElement('h3');
     movieTitle.textContent = movie.Title;
     movieDiv.appendChild(movieTitle);
@@ -148,28 +148,14 @@ function closePanel() {
   document.getElementById("panel").style.width = "0px";
 }
 
-
-// declaring the local array
-localArray = [];
 // Retrieve the value from local storage
 var movItem = window.localStorage.getItem("mov");
-// Parse the value if necessary
-var localArray = JSON.parse(movItem);
-var myArray = localArray;
-console.log(myArray);
-// function to store the current IMDb Id to local storage
-function dataToLocalArray(imdbID){
-  if(localArray.includes(imdbID)){
-    alert('mov id is already exits');
-  }
-  else{
-    alert('movies added');
-    localArray.push(imdbID);
-    let movItem = JSON.stringify(localArray);
-    window.localStorage.setItem("mov",movItem);
-    displayFavoriteMovie(imdbID);
-  }
-}
+// Parse the value if necessary and initialize localArray as an array
+var localArray = movItem ? JSON.parse(movItem) : [];
+
+// Make a copy of localArray using the spread operator
+var myArray = [...localArray];
+// console.log(myArray);
 
 // to load the favorite movies into favorite list
 window.onload = function() {
@@ -239,10 +225,35 @@ function addFavMov()
   
     FavMoviesList.appendChild(favImgDiv);
   }
+// function to store the current IMDb Id to local storage
+  async function dataToLocalArray(movieId) {
+    const storedData = window.localStorage.getItem("mov");
+    const myArray = storedData ? JSON.parse(storedData) : [];
+  
+    if (myArray.includes(movieId)) {
+      alert('mov id is already exists');
+    } else {
+      alert('movie added');
+      myArray.push(movieId);
+      const movItem = JSON.stringify(myArray);
+      window.localStorage.setItem("mov", movItem);
+  
+      // Display the favorite movie
+      await displayFavoriteMovie(movieId);
+    }
+  }
   //deleting the favorite movie ID in local storage
-  function removeFromFavorites(movieId, listItem) 
-  {
-    localStorage.removeItem(movieId);
-      listItem.remove();
+  function removeFromFavorites(movieId, listItem) {
+    const storedData = window.localStorage.getItem("mov");
+    const myArray = storedData ? JSON.parse(storedData) : [];
+  
+    const index = myArray.indexOf(movieId);
+    if (index !== -1) {
+      myArray.splice(index, 1);
+      const movItem = JSON.stringify(myArray);
+      window.localStorage.setItem("mov", movItem);
+    }
+  
+    listItem.remove();
   }
     
